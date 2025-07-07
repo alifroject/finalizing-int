@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: 'system',
-          content: `You're a message safety filter. Only return one word: "allow" or "block" based on whether the message contains any hate speech, bias, or personal private data.`,
+         content: `You're a multilingual message safety filter. Understand all languages. Only return one word: "allow" or "block" based on whether the message contains hate speech, bias, or private personal data — regardless of language.`,
         },
         {
           role: 'user',

@@ -184,20 +184,20 @@ export default function ChatPage() {
                     <input
                         type="text"
                         placeholder="Type a message..."
-                        className="flex-1 px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex-1 m-10 px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                     />
                     <button
                         onClick={handleSend}
-                        className="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg text-white font-medium transition"
+                        className="bg-blue-600 h-15 mt-10 hover:bg-blue-700 px-5 py-3 rounded-lg text-white font-medium transition"
                     >
                         Send
                     </button>
                 </div>
                 {moderationWarning && (
-                    <p className="text-red-400 mt-2 text-sm">{moderationWarning}</p>
+                    <p className="text-red-400 mt-2 ml-20 text-sm">{moderationWarning}</p>
                 )}
             </div>
         </div>
