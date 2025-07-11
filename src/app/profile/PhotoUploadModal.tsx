@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '@/app/firebase/firebase';
-
+import Image from 'next/image';
 interface Props {
   uid: string;
   onClose: () => void;
@@ -74,7 +74,7 @@ export default function PhotoUploadModal({ uid, onClose, onUpload }: Props) {
         >
           <p className="text-gray-500">Click or drag & drop to upload image</p>
           {preview && (
-            <img
+            <Image
               src={preview}
               alt="Preview"
               className="mt-4 w-32 h-32 mx-auto rounded-full shadow-md"

@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Navbar from "@/components/layout/Navbar";
+
 export default function Home() {
   return (
     <>
@@ -8,8 +7,9 @@ export default function Home() {
           Welcome to the App!
         </h1>
         <p className="text-lg md:text-xl text-gray-700 max-w-xl">
-          This is your homepage. You can use the sidebar or navbar to navigate to other pages like "Find People" or "Profile".
+          This is your homepage. You can use the sidebar or navbar to navigate to other pages like &quot;Find People&quot; or &quot;Profile&quot;.
         </p>
+
       </div>
     </>
   );

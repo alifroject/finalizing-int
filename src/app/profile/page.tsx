@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { auth, dbFire } from '@/app/firebase/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import PhotoUploadModal from './PhotoUploadModal';
+import Image from 'next/image';
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
@@ -18,7 +19,6 @@ export default function ProfilePage() {
   const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -124,7 +124,7 @@ export default function ProfilePage() {
               onClick={() => setShowModal(true)}
               className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg group cursor-pointer"
             >
-              <img
+              <Image
                 src={photoURL || '/default-avatar.png'}
                 alt="Profile"
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
@@ -156,7 +156,7 @@ export default function ProfilePage() {
               onClick={() => setShowModal(true)}
               className="relative w-24 h-24 rounded-full overflow-hidden   shadow-lg group cursor-pointer"
             >
-              <img
+              <Image
                 src={photoURL || '/default-avatar.png'}
                 alt="Profile"
                 className="w-full h-full object-cover"

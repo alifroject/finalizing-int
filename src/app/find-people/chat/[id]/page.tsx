@@ -2,6 +2,9 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
+import { DocumentData, DocumentSnapshot, Timestamp } from 'firebase/firestore';
+
 import {
     getFirestore,
     doc,
@@ -27,7 +30,7 @@ interface ChatMessage {
     id: string;
     senderId: string;
     text: string;
-    createdAt: any;
+    createdAt: Date | Timestamp;
     flagged?: boolean; // ✅ Add this line
 }
 
@@ -73,12 +76,14 @@ export default function ChatPage() {
         const chatPairId = [currentUser.uid, id].sort().join('_');
         const chatRef = doc(db, 'chattings', chatPairId);
 
-        const unsubscribe = onSnapshot(chatRef, (docSnap) => {
+        const unsubscribe = onSnapshot(chatRef, (docSnap: DocumentSnapshot<DocumentData>) => {
+
             if (docSnap.exists()) {
                 const data = docSnap.data();
                 const msgList = data.messages || [];
 
-                const filtered = msgList.map((msg: any, index: number) => ({
+                const filtered = msgList.map((msg: Partial<ChatMessage>, index: number) => ({
+
                     id: index.toString(),
                     ...msg,
                 }));
@@ -146,7 +151,7 @@ export default function ChatPage() {
             {/* Top Profile Bar */}
             {targetUser ? (
                 <div className="flex items-center gap-4 p-4 bg-gray-900 border-b border-gray-700 shadow-md">
-                    <img
+                    <Image
                         src={targetUser.photoURL}
                         alt={targetUser.name}
                         className="w-12 h-12 rounded-full border-2 border-blue-500"
