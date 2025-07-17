@@ -92,7 +92,7 @@ export default function FindPeople() {
                 className="bg-gradient-to-tr from-slate-700/70 to-slate-800/70 backdrop-blur-md rounded-2xl p-5 shadow-xl hover:shadow-cyan-500/30 transition-shadow duration-300 border border-slate-600"
               >
                 <div className="flex items-center space-x-4">
-                  <Image
+                  <img
                     src={user.photoURL}
                     alt={user.name}
                     className="w-16 h-16 rounded-full object-cover border-2 border-cyan-400 shadow-md"

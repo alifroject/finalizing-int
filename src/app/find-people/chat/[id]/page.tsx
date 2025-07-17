@@ -110,7 +110,7 @@ export default function ChatPage() {
             const isFlagged = decision === 'block';
 
             if (isFlagged) {
-                setModerationWarning('⚠️ This message may contain hate speech, bias, or private data.');
+                setModerationWarning('⚠️ This message may contain hate speech, bias.');
             } else {
                 setModerationWarning('');
             }
@@ -151,7 +151,7 @@ export default function ChatPage() {
             {/* Top Profile Bar */}
             {targetUser ? (
                 <div className="flex items-center gap-4 p-4 bg-gray-900 border-b border-gray-700 shadow-md">
-                    <Image
+                    <img
                         src={targetUser.photoURL}
                         alt={targetUser.name}
                         className="w-12 h-12 rounded-full border-2 border-blue-500"

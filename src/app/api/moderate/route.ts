@@ -1,33 +1,29 @@
-// app/api/moderate/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function POST(req: NextRequest) {
-  const { message } = await req.json();
+export async function POST(req: Request) {
+    try {
+        const { message } = await req.json();
 
-  const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, // Stored in .env.local
-    },
-    body: JSON.stringify({
-      model: 'gpt-3.5-turbo', 
-      messages: [
-        {
-          role: 'system',
-         content: `You're a multilingual message safety filter. Understand all languages. Only return one word: "allow" or "block" based on whether the message contains hate speech, bias, or private personal data — regardless of language.`,
-        },
-        {
-          role: 'user',
-          content: message,
-        },
-      ],
-      temperature: 0,
-    }),
-  });
+        const res = await fetch('http://127.0.0.1:8000/moderate/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message }),
+        });
 
-  const data = await openaiRes.json();
-  const decision = data.choices?.[0]?.message?.content?.toLowerCase() ?? 'allow';
+        if (!res.ok) {
+            console.error('FastAPI responded with:', res.status, await res.text());
+            return NextResponse.json({ error: 'FastAPI error' }, { status: 500 });
+        }
 
-  return NextResponse.json({ decision });
+        const data = await res.json();
+        const decision = data?.decision ?? 'allow';
+
+        return NextResponse.json({ decision });
+
+    } catch (error) {
+        console.error('Next.js API error:', error);
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    }
 }

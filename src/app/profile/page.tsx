@@ -124,7 +124,7 @@ export default function ProfilePage() {
               onClick={() => setShowModal(true)}
               className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg group cursor-pointer"
             >
-              <Image
+              <img
                 src={photoURL || '/default-avatar.png'}
                 alt="Profile"
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
@@ -156,7 +156,7 @@ export default function ProfilePage() {
               onClick={() => setShowModal(true)}
               className="relative w-24 h-24 rounded-full overflow-hidden   shadow-lg group cursor-pointer"
             >
-              <Image
+              <img
                 src={photoURL || '/default-avatar.png'}
                 alt="Profile"
                 className="w-full h-full object-cover"
